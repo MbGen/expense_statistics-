@@ -1,4 +1,3 @@
-import matplotlib.container
 import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -34,12 +33,13 @@ def _show_bar_plot(*,
                    title: str = None,
                    show_spent: bool = False) -> None:
     res = sns.barplot(x=x.value, y=y.value, data=dataframe)
+    TITLE_OFFSET = 1.1
     for bars in res.containers:
         if show_spent:
             res.bar_label(bars, labels=[f"{row.price} {CURRENCY}\n{row.spent}" for _, row in dataframe.iterrows()])
         else:
             res.bar_label(bars)
-    res.set_title(title)
+    res.set_title(title, y=TITLE_OFFSET)
     plt.show()
 
 
@@ -106,14 +106,18 @@ def _show_average_expenses(expenses: Iterable[Any],
 def _show_min_expenses(expenses: Iterable[Any],
                        field: Literal[ExpenseField.Date, ExpenseField.Type]) -> None:
     dataframe = pd.DataFrame(expenses)
-    min_dataframe = pd.DataFrame(dataframe.groupby(field.value)[ExpenseField.Price.value].min()).reset_index()
-    _show_bar_plot(dataframe=min_dataframe, x=field, y=ExpenseField.Price, title="Минимальные расходы")
+    dataframe = dataframe.loc[dataframe.groupby(field.value)[ExpenseField.Price.value].idxmin()]
+    _show_bar_plot(dataframe=dataframe,
+                   x=field,
+                   y=ExpenseField.Price,
+                   title="Минимальные расходы",
+                   show_spent=True)
 
 
 def _show_max_expenses(expenses: Iterable[Any],
                        field: Literal[ExpenseField.Date, ExpenseField.Type]) -> None:
     dataframe = pd.DataFrame(expenses)
-    dataframe = dataframe.loc[dataframe.groupby(ExpenseField.Type.value)[ExpenseField.Price.value].idxmax()]
+    dataframe = dataframe.loc[dataframe.groupby(field.value)[ExpenseField.Price.value].idxmax()]
     _show_bar_plot(dataframe=dataframe,
                    x=field,
                    y=ExpenseField.Price,
@@ -122,4 +126,4 @@ def _show_max_expenses(expenses: Iterable[Any],
 
 
 if __name__ == "__main__":
-    max_expenses()
+    min_expenses()
