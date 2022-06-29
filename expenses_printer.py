@@ -1,11 +1,12 @@
 from expenses_basic import Expense
+from config import CURRENCY
 
 
 def _get_formatted_expenses(expense: Expense) -> str:
-    pattern = f"Дата траты = {expense.date}" \
-        f"Тип траты = {expense.expense_type}" \
-        f"Сумма траты = {expense.price}" \
-        f"На что потратили = {expense.on_what_spent}"
+    pattern = f"\nДата траты : {expense.date}" \
+        f"\nТип траты : {expense.expense_type}" \
+        f"\nСумма траты : {expense.price} {CURRENCY}" \
+        f"\nНа что потратили : {expense.on_what_spent}"
     return pattern
 
 
