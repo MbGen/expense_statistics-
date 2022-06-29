@@ -1,4 +1,3 @@
 DEFAULT_DB_NAME = "expenses.db"
 DEFAULT_TIME_FORMAT = "%Y-%m-%d"
-DEFAULT_ENCODING = "UTF-8"
 CURRENCY = "грн"

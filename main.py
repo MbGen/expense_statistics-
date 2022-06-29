@@ -1,7 +1,6 @@
-# 2. Показуем трати
-# поки в консолi
-# Анализировать траты
-# можна будувати графiки з dask, seaborn
+from expenses_saver import save_expense
+from expenses_printer import print_expense
+from analyse_expenses import all_expenses
 
 
 def main():

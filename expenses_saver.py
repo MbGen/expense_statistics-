@@ -1,6 +1,5 @@
-from datetime import datetime
 from peewee import SqliteDatabase, Model, AutoField, DateField, FloatField, TextField, IntegrityError
-from expenses_basic import Expense, ExpensesType
+from expenses_basic import Expense
 from os.path import exists
 
 from config import DEFAULT_DB_NAME
@@ -22,6 +21,7 @@ class ExpenseModel(BaseModel):
 
 
 def save_expense(expense: Expense) -> None:
+    """Saves expense to database"""
     _create_db_file_ifn()
     try:
         ExpenseModel.create(
@@ -38,10 +38,3 @@ def _create_db_file_ifn() -> None:
     if not exists(DEFAULT_DB_NAME):
         open(DEFAULT_DB_NAME, "w")
         ExpenseModel.create_table()
-
-
-if __name__ == '__main__':
-    save_expense(Expense(date=datetime(2022, 6, 17),
-                         expense_type=ExpensesType.OnlineSubscriptions,
-                         price=1420,
-                         on_what_spent="Google"))
