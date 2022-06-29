@@ -34,7 +34,7 @@ from expenses_printer import print_expense
   
 **import expenses statistic to see graphs**  
 ```python
-from expenses_statistic import all_expenses, average_expenses, min_expenses, max_expenses
+from expenses_statistic import all_expenses, average_expenses, min_expenses, max_expenses, DateLimit
 ```
   
 ## Example ##
