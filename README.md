@@ -54,3 +54,5 @@ def main():
  if __name__ == __main__:
      main()
 ```
+**result of all_expense function**
+![Снимок экрана 2022-06-30 132235](https://user-images.githubusercontent.com/70693047/176654659-8cb3031c-45c3-490a-82bb-b7cca1afead4.png)
